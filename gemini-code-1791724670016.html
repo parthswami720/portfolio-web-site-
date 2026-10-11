@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parth | Video Editor & Motion Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090a0f;
+      --card-bg: #12131b;
+      --accent: #ff334b;
+      --accent-glow: rgba(255, 51, 75, 0.35);
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --border: rgba(255, 255, 255, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(14px);
+      background: rgba(9, 10, 15, 0.8);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 8%;
+    }
+
+    .logo {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #fff;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-left: 2rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: #fff;
+    }
+
+    .hero {
+      padding: 6rem 8% 4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      max-width: 900px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.35rem 0.9rem;
+      background: rgba(255, 51, 75, 0.12);
+      border: 1px solid rgba(255, 51, 75, 0.3);
+      color: var(--accent);
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      line-height: 1.1;
+      font-weight: 800;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 650px;
+      margin-bottom: 2rem;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.85rem 1.8rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border: 1px solid var(--accent);
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px var(--accent-glow);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--border);
+      color: #fff;
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Portfolio Section */
+    section {
+      padding: 4rem 8%;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 51, 75, 0.4);
+    }
+
+    .card-thumb {
+      width: 100%;
+      height: 200px;
+      background: #1a1b26;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .play-icon {
+      position: absolute;
+      width: 48px;
+      height: 48px;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .play-icon::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+      border-left: 12px solid #fff;
+      margin-left: 3px;
+    }
+
+    .card-body {
+      padding: 1.4rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+
+    .card-body h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-body p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+
+    .meta-tags {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .meta-tag {
+      background: rgba(255, 255, 255, 0.04);
+      padding: 0.25rem 0.6rem;
+      font-size: 0.75rem;
+      border-radius: 4px;
+      color: #cbd5e1;
+    }
+
+    /* Skills */
+    .skills-wrapper {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .skill-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+    }
+
+    .skill-box h4 {
+      font-size: 1.05rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .skill-box p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Video Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .modal-content {
+      width: 100%;
+      max-width: 850px;
+      background: #000;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid var(--border);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.2rem;
+      font-size: 1.5rem;
+      color: #fff;
+      cursor: pointer;
+      z-index: 10;
+      background: rgba(0,0,0,0.5);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+    }
+
+    .video-container iframe,
+    .video-container video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1.2rem;
+    }
+
+    .social-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .social-links a:hover {
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">PARTH<span>.</span></div>
+    <nav>
+      <a href="#work">Work</a>
+      <a href="#skills">Specialties</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <span class="badge">Available for Client Projects</span>
+      <h1>Crafting High-Retention Visual Narratives</h1>
+      <p>I am Parth, a video editor and visual storyteller with 1+ years of experience turning ideas into dynamic animations, documentary explainers, and engaging social content.</p>
+      <div class="cta-row">
+        <a href="#work" class="btn btn-primary">Watch My Work</a>
+        <a href="https://instagram.com/parthy_ji" target="_blank" rel="noopener" class="btn btn-outline">DM on Instagram</a>
+      </div>
+    </section>
+
+    <!-- Portfolio Projects -->
+    <section id="work">
+      <h2 class="section-title">Selected Projects</h2>
+      <p class="section-desc">A selection of animated explainers, documentary edits, and motion graphic pieces.</p>
+      
+      <div class="grid">
+        <!-- Project 1: Monk Mode / Self-Improvement -->
+        <article class="card" onclick="openVideo('Monk Mode: Discipline & Mindset Breakdown')">
+          <div class="card-thumb">
+            <div class="play-icon"></div>
+            <div style="background: radial-gradient(circle, #3d1017 0%, #111 100%); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.4rem; color: #ff5e62;">MONK MODE</div>
+          </div>
+          <div class="card-body">
+            <span class="card-tag">Explainer & Motion Graphics</span>
+            <h3>Monk Mode: The Science of Focus</h3>
+            <p>Anime-inspired storytelling with kinetic typography, custom sound design, and paced visual hooks designed for maximum audience retention.</p>
+            <div class="meta-tags">
+              <span class="meta-tag">Kinetic Typography</span>
+              <span class="meta-tag">Visual Pacing</span>
+              <span class="meta-tag">Sound FX</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2: Habit Architecture -->
+        <article class="card" onclick="openVideo('30 Days Reset: Behavioral Reframe')">
+          <div class="card-thumb">
+            <div class="play-icon"></div>
+            <div style="background: radial-gradient(circle, #1f1b3a 0%, #0d0f18 100%); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.4rem; color: #a78bfa;">30-DAY RESET</div>
+          </div>
+          <div class="card-body">
+            <span class="card-tag">Documentary & Lifestyle</span>
+            <h3>30 Days to Rebuild Your Foundation</h3>
+            <p>Fast-paced editing utilizing seamless asset compositing, screen mockups, and minimal motion elements to communicate self-discipline rules.</p>
+            <div class="meta-tags">
+              <span class="meta-tag">Fast Cuts</span>
+              <span class="meta-tag">UI Animation</span>
+              <span class="meta-tag">B-Roll Mixing</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3: Urban Dynamics / Interview Documentaries -->
+        <article class="card" onclick="openVideo('The Human City: Interview Documentary')">
+          <div class="card-thumb">
+            <div class="play-icon"></div>
+            <div style="background: radial-gradient(circle, #13271f 0%, #0b110f 100%); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.4rem; color: #4ade80;">THE HUMAN CITY</div>
+          </div>
+          <div class="card-body">
+            <span class="card-tag">Interview & Long-Form Doc</span>
+            <h3>Urban Dynamics: Cities & Psychology</h3>
+            <p>Podcast & talking-head documentary style edit featuring lower-thirds, archival footage overlays, and multi-cam pacing.</p>
+            <div class="meta-tags">
+              <span class="meta-tag">Documentary</span>
+              <span class="meta-tag">Lower Thirds</span>
+              <span class="meta-tag">Multi-Cam</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Capabilities -->
+    <section id="skills">
+      <h2 class="section-title">Editing Specialties</h2>
+      <p class="section-desc">Technical craftsmanship honed for creators, brands, and digital agencies.</p>
+      
+      <div class="skills-wrapper">
+        <div class="skill-box">
+          <h4>Kinetic Typography</h4>
+          <p>Punchy, synced text animation that maintains high viewer engagement across short-form and long-form formats.</p>
+        </div>
+        <div class="skill-box">
+          <h4>Retention Pacing</h4>
+          <p>Carefully balanced rhythm using audio cues, speed ramping, and visual re-hooks to prevent viewer drop-off.</p>
+        </div>
+        <div class="skill-box">
+          <h4>Asset Compositing & SFX</h4>
+          <p>Rich Foley effects, ambient soundscapes, and multi-layered visual overlays that bring still frames to life.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Video Modal -->
+  <div id="videoModal" class="modal" onclick="closeModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <span class="modal-close" onclick="closeModal()">&times;</span>
+      <div class="video-container" id="videoBox">
+        <!-- Replace iframe with your YouTube embeds or direct mp4 video tags -->
+        <iframe id="videoIframe" src="" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <footer id="contact">
+    <div>
+      <p>&copy; 2026 Parth. All rights reserved.</p>
+    </div>
+    <div class="social-links">
+      <a href="https://instagram.com/parthy_ji" target="_blank" rel="noopener">Instagram (@parthy_ji)</a>
+      <a href="https://youtube.com/@creatwithparth" target="_blank" rel="noopener">YouTube (@creatwithparth)</a>
+    </div>
+  </footer>
+
+  <script>
+    function openVideo(title) {
+      const modal = document.getElementById('videoModal');
+      const iframe = document.getElementById('videoIframe');
+      
+      // Default to your YouTube channel URL or paste direct unlisted project links here
+      iframe.src = "https://www.youtube-nocookie.com/embed?listType=user_uploads&list=creatwithparth&autoplay=1";
+      modal.style.display = 'flex';
+    }
+
+    function closeModal(e) {
+      const modal = document.getElementById('videoModal');
+      const iframe = document.getElementById('videoIframe');
+      iframe.src = "";
+      modal.style.display = 'none';
+    }
+  </script>
+</body>
+</html>
